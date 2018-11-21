@@ -1,0 +1,33 @@
+import math
+from matplotlib import  pyplot as plt
+import numpy as np
+import numpy
+
+a = 2
+b = 200
+
+e_new = np.linspace(1, 0.01, 30)
+
+dicho = lambda e : 2*math.log((b-a)/e, 2)
+plt.plot(e_new, np.vectorize(dicho)(e_new), '-r')
+plt.grid(True)
+plt.show()
+
+gold = lambda e : 2*math.log((b-a)/e, (1 + math.sqrt(5)) / 2)
+plt.plot(e_new, np.vectorize(gold)(e_new), '-b')
+plt.grid(True)
+plt.show()
+
+def fibo(e, a=2, b=200):
+    def fib(n):
+        return (int)(1/math.sqrt(5)*(((1 + math.sqrt(5))/2)**n-((1 - math.sqrt(5))/2)**n))
+    n = 0
+    while (b - a) / e > fib(n):
+        n += 1
+    n -= 1
+    return 2*n
+
+
+plt.plot(e_new, np.vectorize(fibo)(e_new), '-g')
+plt.grid(True)
+plt.show()
